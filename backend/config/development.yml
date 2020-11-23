@@ -1,0 +1,20 @@
+db:
+    host: '34.198.89.91'
+    username: 'minhthong'
+    password: 'minhthong'
+    logging: false
+
+server:
+    url: 'http://localhost:3000'
+    port: 8080
+
+jwt:
+    jwtSecret: 'myjwtsecret'
+
+cors:
+    origin:
+        - 'http://localhost:3000'
+
+redis:
+    host: 127.0.0.1
+    password: redis

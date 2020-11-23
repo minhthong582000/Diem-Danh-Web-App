@@ -1,0 +1,9 @@
+./build
+node_modules
+.vscode
+.eslintrc.json
+.prettierrc
+.env
+.env.redis
+redis.conf
+prometheus.*

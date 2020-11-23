@@ -1,0 +1,14 @@
+server:
+    port: 3000
+
+db:
+    database: 'ump'
+    port: 3306
+
+jwt:
+    expiresIn: 7d
+    session: false
+
+static:
+    maxAge: '30 days'
+    dotfiles: 'allow'

@@ -1,0 +1,10 @@
+cors:
+    origin:
+        - 'http://34.198.89.91'
+        - 'http://localhost:3000'
+
+server:
+    url: 'http://34.198.89.91:8080'
+
+db:
+    logging: false

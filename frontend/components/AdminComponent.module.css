@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+.adminWrapper {
+    background-color: #F7F9FD;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+    font-family: "Lato", sans-serif;
+    margin: 0;
+}
+
+.movieContainer {
+    margin: 20px 0;
+}
+
+.movieContainer select {
+    background-color: #fff;
+    border: 0;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+    padding: 5px 15px 5px 15px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.container {
+    perspective: 1000px;
+    margin-bottom: 10px;
+}
+
+.seat {
+    height: 18%;
+    width: 18%;
+    /* margin: 0.5%; */
+}
+
+.seat.selected {
+    background-color: #3ce83c;
+}
+
+.seat.occupied {
+    background-color: red;
+}
+
+/* .seat:nth-of-type(2) {
+    margin-right: 18px;
+} */
+
+.seat:nth-last-of-type(8) {
+    margin-left: 100px;
+}
+
+.seat:not(.occupied):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.showcase.seat:not(.occupied):hover {
+    cursor: default;
+    transform: scale(1);
+}
+
+.showcase {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #777;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.showcase li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+.showcase li small {
+    margin-left: 2px;
+    width: fit-content;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.screen {
+    background: #C6FFDD;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 70px;
+    width: 61%;
+    margin: 15px 0;
+    transform: rotateX(-45deg);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+    margin-left: 20%;
+
+}
+
+p.text {
+    margin: 5px 0;
+    display: inline;
+}
+
+p.text span {
+    color: #6faef6;
+}

@@ -1,0 +1,288 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "QRcode-HSV API",
+        "description": "This is API document.",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "tatdengta@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/api/v1"
+        },
+        {
+            "url": "http://34.198.89.91:8088/api/v1"
+        }
+    ],
+    "tags": [
+        {
+            "name": "attender",
+            "description": "Everything about attenders."
+        },
+        {
+            "name": "auth",
+            "description": "User authorization"
+        }
+    ],
+    "paths": {
+        "/attender/generate": {
+            "post": {
+                "tags": ["attender"],
+                "summary": "[ADMIN] Generate qrcode for all attenders",
+                "operationId": "generateCode",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "422": {
+                        "description": "Already generated",
+                        "content": {}
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "x-codegen-request-body-name": "body"
+            }
+        },
+        "/attender": {
+            "get": {
+                "tags": ["attender"],
+                "summary": "[ADMIN] getAll",
+                "operationId": "getAll",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/attender"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "x-codegen-request-body-name": "body"
+            },
+            "delete": {
+                "tags": ["attender"],
+                "summary": "[ADMIN] Delete all",
+                "operationId": "deleteAttenders",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "deleted": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": ["attender"],
+                "summary": "checkin (absent -> in)",
+                "operationId": "checkin",
+                "requestBody": {
+                    "description": "Attender's identity.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "identity": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "seat": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "invalid credentials",
+                        "content": {}
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "x-codegen-request-body-name": "body"
+            }
+        },
+        "/auth/login/admin": {
+            "post": {
+                "tags": ["auth"],
+                "summary": "login for admin and editor",
+                "operationId": "loginForAdmin",
+                "requestBody": {
+                    "description": "Credentials",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "username": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "expires": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "Invalid credentials.",
+                        "content": {}
+                    },
+                    "403": {
+                        "description": "This account hasn’t been activated yet.",
+                        "content": {}
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "x-codegen-request-body-name": "body"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "user": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "date"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "date"
+                    }
+                }
+            },
+            "attender": {
+                "type": "object",
+                "properties": {
+                    "seat": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "qrCode": {
+                        "type": "string",
+                        "description": "qrCode image URL"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "attender's identity"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "attender's status",
+                        "items": {
+                            "type": "string",
+                            "default": "absent",
+                            "enum": ["absent", "in", "out"]
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

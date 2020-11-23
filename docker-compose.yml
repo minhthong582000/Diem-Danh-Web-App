@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+    # API container
+    backend:
+        container_name: qr-api
+        # image: docker.pkg.github.com/minhthong582000/qr-hsv-backend/qr-hsv-api:latest
+        build:
+            context: .
+        restart: on-failure
+        volumes:
+            - qr-backend:/user/src/app
+        ports:
+            - 8088:8080
+        env_file:
+            - ./backend/.env
+        networks:
+            - qr-backend
+        extra_hosts:
+            - docker.host:172.17.0.1
+
+    # Frontend running with Nginx container
+    frontend:
+        container_name: qr-fe
+        # image: docker.pkg.github.com/minhthong582000/qr-hsv-backend/qr-hsv-api:latest
+        build:
+            context: .
+        restart: on-failure
+        ports:
+            - 8089:8089
+        networks:
+            - qr-fe
+
+# Volume
+volumes:
+    qr-backend:
+
+# Network
+networks:
+    qr-backend:
+        name: qr-backend
+    qr-fe:
+        name: qr-fe
