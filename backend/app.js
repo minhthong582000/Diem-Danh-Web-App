@@ -14,7 +14,7 @@ const AppError = require('./src/common/error/error');
 const { httpStatus } = require('./src/common/error/http-status');
 
 /**
- * -------------- GENERAL SETUP ----------------
+ * -------------- GENERAL SETUP -----------------
  */
 
 require('dotenv').config();
